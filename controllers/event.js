@@ -39,13 +39,13 @@ const actualizarEvento = async (req, res = response)=>{
         const uid = req.uid;
         const evento = await Evento.findById(eventoId);
         if (!evento){
-            res.status(404).json({
+            return res.status(404).json({
                 ok: false,
                 msg: 'Evento no existe por ese ID'
             });   
         }
         if(evento.user.toString() !== uid ){
-            res.status(401).json({
+            return res.status(401).json({
                 ok: false,
                 msg: 'No tiene privilegio de editar este evento'
             });   
@@ -73,13 +73,13 @@ const eliminarEvento = async (req, res = response)=>{
         const uid = req.uid;
         const evento = await Evento.findById(eventoId);
         if (!evento){
-            res.status(404).json({
+            return res.status(404).json({
                 ok: false,
                 msg: 'Evento no existe por ese ID'
             });   
         }
         if(evento.user.toString() !== uid ){
-            res.status(401).json({
+            return res.status(401).json({
                 ok: false,
                 msg: 'No tiene privilegio para eliminar este evento'
             });   
